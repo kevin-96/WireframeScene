@@ -6,7 +6,7 @@
 #   Demonstrates use of gluCylinder and gluSphere to draw
 #   3-d objects.
 #
-# THIS FILE IS ONLY FOR REFERENCE
+# THIS FILE IS FOR REFERENCE ONLY!!!
 #==============================
 
 from OpenGL.GLUT import *
@@ -21,7 +21,7 @@ CAM_ANGLE = 60.0
 
 # These parameters define simple animation properties
 MIN_STEP = 0.1
-DEFAULT_STEP = 0.5 # Controls the rotation speed
+DEFAULT_STEP = 0.2 # Controls the rotation speed
 ANGLE_STEP = DEFAULT_STEP
 FPS = 60.0
 DELAY = int(1000.0 / FPS + 0.5)
@@ -83,7 +83,7 @@ def display():
         glOrtho(-winWidth/40, winWidth/40, -winHeight/40, winHeight/40, -100, 100)
     
     # Clear the Screen
-    glClearColor(0.0, 0.0, 0.0, 0.0)
+    glClearColor(1.0, 1.0, 1.0, 0.0) # Clears the screen with white
     glClear(GL_COLOR_BUFFER_BIT)
 
     # And draw the "Scene"
@@ -151,7 +151,7 @@ def drawScene():
     glLoadIdentity();
     glTranslate(0, -3, -20)   # Move world coordinate system so it is in view
     glRotated(angleMovement, 0, 1, 0)  # Spin around y-axis
-    glColor3f(1, 1, 1)
+    glColor3f(0, 0, 0) # Controls wireframe color. (1,1,1) = WHITE. (0,0,0) = BLACK
     draw() 
 
 # Draw the entire scene - house + coordinate frame    
