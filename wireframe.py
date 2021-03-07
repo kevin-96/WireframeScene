@@ -20,7 +20,7 @@ CAM_ANGLE = 60.0
 
 # These parameters define simple animation properties
 MIN_STEP = 0.1
-DEFAULT_STEP = 1.5 # Controls the rotation speed (when animated)
+DEFAULT_STEP = 2.0 # Controls the rotation speed (when animated)
 ANGLE_STEP = DEFAULT_STEP
 FPS = 60.0
 DELAY = int(1000.0 / FPS + 0.5)
@@ -33,6 +33,7 @@ step = MIN_STEP
 animate = False
 angleMovement = 0 # Controls the initial angle the scene is viewed from (0)
 perspectiveMode = True
+# TODO: CREATE VARIABLES FOR CAR/ANIMATION
 
 def main():
     # Create the initial window
@@ -108,8 +109,9 @@ def advance():
         angleMovement -= 360 # So doesn't get too large
     elif angleMovement < 0:
         angleMovement += 360
+    # TODO: Get rid of the camera rotation (), 
+    # TODO: ANIMATE THE CAR!
 
-# Allows the use of arrow keys to control the camera angle
 def specialKeys(key, x, y):
 	global ANGLE_STEP
 	if key == GLUT_KEY_LEFT:
@@ -122,8 +124,10 @@ def specialKeys(key, x, y):
 # key: ASCII value of the key that was pressed
 # x,y: Location of the mouse (in the window) at time of key press)
 def keyboard(key, x, y):
-    if ord(key) == 27:  # ASCII code 27 = ESC-key
-        glutLeaveMainLoop()
+    global angleMovement
+    if ord(key) == 27: # ASCII code 27 = ESC-key
+        glutLeaveMainLoop() # TODO: This function is not working
+        glutDest
     elif ord(key) == ord('p'):
         global perspectiveMode
         print("DEBUG: Toggling perspective mode")
@@ -132,6 +136,14 @@ def keyboard(key, x, y):
     elif ord(key) == ord(' '): # Pressing spacebar animates the scene
         global animate
         animate = not animate # 'not animate' means 'True'
+    elif ord(key) == 97: # Rotate scene to the left (CCW)
+    # TODO: 97 = 'a', but we have to change to left arrow key
+        angleMovement += ANGLE_STEP
+        glutPostRedisplay()
+    elif ord(key) == 100: # Rotate scene to the right (CW)
+    # TODO: 100 = 'd', but we have to change to right arrow key
+        angleMovement -= ANGLE_STEP
+        glutPostRedisplay()
 
 def drawScene():
     """
@@ -155,6 +167,8 @@ def draw():
     gluCylinder(cone, 3, 0.5, 20, 10, 11) # 1st Cone
     glTranslated(0, 30, 0) # Move 2nd cone farther away from 1st cone
     gluCylinder(cone, 3, 0.5, 20, 10, 11) # 2nd Cone
+    # Car
+    # TODO: DRAW THE CAR (BODY & WHEELS)
     glPopMatrix()
 
 #===============================
