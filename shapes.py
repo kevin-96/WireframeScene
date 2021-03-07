@@ -72,7 +72,7 @@ def init():
 # Currently it just draws a simple polyline (LINE_STRIP)
 def display():
     # Set the viewport to the full screen
-    glViewport(0, 0, winWidth, winHeight)
+    glViewport(0, 0, 2*winWidth, 2*winHeight) # For Mac: Multiply window width & height by 2
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
