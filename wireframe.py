@@ -103,21 +103,16 @@ def timer(alarm):
 
 # Advance the scene one frame
 def advance():
-    global angleMovement
-    angleMovement += ANGLE_STEP
-    if angleMovement >= 360:
-        angleMovement -= 360 # So doesn't get too large
-    elif angleMovement < 0:
-        angleMovement += 360
+    
     # TODO: Get rid of the camera rotation (), 
     # TODO: ANIMATE THE CAR!
 
 def specialKeys(key, x, y):
     global ANGLE_STEP, angleMovement
-    if key == GLUT_KEY_LEFT:
+    if key == GLUT_KEY_LEFT: # Pressing left arrow key rotates camera left of the scene
         angleMovement += ANGLE_STEP
         glutPostRedisplay()
-    elif key == GLUT_KEY_RIGHT:
+    elif key == GLUT_KEY_RIGHT: # Pressing right arrow key rotates camera right of the scene
         angleMovement -= ANGLE_STEP
         glutPostRedisplay()
 
@@ -128,8 +123,8 @@ def specialKeys(key, x, y):
 def keyboard(key, x, y):
     global angleMovement
     if ord(key) == 27: # ASCII code 27 = ESC-key
-        glutLeaveMainLoop() # TODO: This function is not working
-        # sys.exit(0)
+        glutLeaveMainLoop() # This function is not working
+        # TODO: Update freeglut
     elif ord(key) == ord('p'):
         global perspectiveMode
         print("DEBUG: Toggling perspective mode")

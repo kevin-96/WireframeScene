@@ -6,7 +6,7 @@
 #   Demonstrates use of gluCylinder and gluSphere to draw
 #   3-d objects.
 #
-# THIS FILE IS FOR REFERENCE ONLY!!!
+# THIS FILE IS FOR REFERENCE/STUDY ONLY!!!
 #==============================
 
 from OpenGL.GLUT import *
@@ -137,7 +137,7 @@ def keyboard(key, x, y):
         glutPostRedisplay()
     elif ord(key) == ord(' '):
         global animate
-        animate = not animate
+        animate = not animate # not animate = True
     elif key == b'f':
     	global fire
     	fire = True
