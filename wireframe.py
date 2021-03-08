@@ -113,11 +113,13 @@ def advance():
     # TODO: ANIMATE THE CAR!
 
 def specialKeys(key, x, y):
-	global ANGLE_STEP
-	if key == GLUT_KEY_LEFT:
-		ANGLE_STEP += DEFAULT_STEP
-	elif key == GLUT_KEY_RIGHT:
-		ANGLE_STEP -= DEFAULT_STEP
+    global ANGLE_STEP, angleMovement
+    if key == GLUT_KEY_LEFT:
+        angleMovement += ANGLE_STEP
+        glutPostRedisplay()
+    elif key == GLUT_KEY_RIGHT:
+        angleMovement -= ANGLE_STEP
+        glutPostRedisplay()
 
 # Callback function used to handle any key events
 # Currently, it just responds to the ESC key (which quits)
@@ -127,7 +129,7 @@ def keyboard(key, x, y):
     global angleMovement
     if ord(key) == 27: # ASCII code 27 = ESC-key
         glutLeaveMainLoop() # TODO: This function is not working
-        glutDest
+        # sys.exit(0)
     elif ord(key) == ord('p'):
         global perspectiveMode
         print("DEBUG: Toggling perspective mode")
@@ -136,14 +138,6 @@ def keyboard(key, x, y):
     elif ord(key) == ord(' '): # Pressing spacebar animates the scene
         global animate
         animate = not animate # 'not animate' means 'True'
-    elif ord(key) == 97: # Rotate scene to the left (CCW)
-    # TODO: 97 = 'a', but we have to change to left arrow key
-        angleMovement += ANGLE_STEP
-        glutPostRedisplay()
-    elif ord(key) == 100: # Rotate scene to the right (CW)
-    # TODO: 100 = 'd', but we have to change to right arrow key
-        angleMovement -= ANGLE_STEP
-        glutPostRedisplay()
 
 def drawScene():
     """
