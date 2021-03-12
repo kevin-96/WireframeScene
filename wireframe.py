@@ -68,11 +68,11 @@ def main():
 
 # Shape Initialization
 def init():
-    global cone, wheel, block
+    global cone, tube, block
     cone = gluNewQuadric() # Cone shape
     gluQuadricDrawStyle(cone, GLU_LINE)
-    wheel = gluNewQuadric() # Car wheel shape
-    gluQuadricDrawStyle(wheel, GLU_LINE)
+    tube = gluNewQuadric() # Car wheel shape, exhaust pipe, headlights
+    gluQuadricDrawStyle(tube, GLU_LINE)
     block = gluNewQuadric() # Car body shape
     gluQuadricDrawStyle(block, GLU_LINE)
 
@@ -122,12 +122,12 @@ def advance():
     # When the car goes forward...
     if carPosition >= carDxMax:
         carPosition = carDxMax
-        carDx = -carDx # Car will move in the opposite direction
+        carDx = -carDx # Car will move in the opposite direction when it reaches the max bound
         wheelAngleD = -wheelAngleD # Wheel will rotate in opposite direction
     # When the car goes backward...
     elif carPosition <= carDxMin:
         carPosition = carDxMin
-        carDx = -carDx # Car will move in the opposite direction
+        carDx = -carDx # Car will move in the opposite direction when it reaches the min bound
         wheelAngleD = -wheelAngleD # Wheel will rotate in opposite direction
 
 def specialKeys(key, x, y):
@@ -192,6 +192,30 @@ def draw():
     gluCylinder(block, 2, 2, 7, 4, 1) # Body (Bottom)
     glPopMatrix()
 
+    # Drawing Car MEGA Exhaust Pipe (Back Center)
+    glPushMatrix()
+    glTranslated(carPosition + -8.65, 0.05, -1.4)
+    glScaled(1, 0.3, 0.5)
+    glRotated(-90, 0, 1, 0) # Rotate exhaust pipe to face in x-axis
+    gluCylinder(tube, 2, 2, 3, 50, 1) # Headlight
+    glPopMatrix()
+
+    # Drawing Car Headlights (Front Left)
+    glPushMatrix()
+    glTranslated(carPosition + 2.9, 0.05, -3.5)
+    glScaled(0.15, 0.3, 0.3) # Making the headlight flatter and smaller
+    glRotated(-90, 0, 1, 0) # Rotate headlight so it faces in the x-axis
+    gluCylinder(tube, 2, 2, 1, 50, 1) # Headlight
+    glPopMatrix()
+
+    # Drawing Car Headlights (Front Right)
+    glPushMatrix()
+    glTranslated(carPosition + 2.9, 0.05, 0.5)
+    glScaled(0.15, 0.3, 0.3) # Making the headlight flatter and smaller
+    glRotated(-90, 0, 1, 0) # Rotate headlight so it faces in the x-axis
+    gluCylinder(tube, 2, 2, 1, 50, 1) # Headlight
+    glPopMatrix()
+
     # Drawing Car Body (Top)
     glPushMatrix()
     glTranslated(carPosition + 0, 1.45, -5)
@@ -205,7 +229,7 @@ def draw():
     glTranslated(carPosition + 1, 0, 2)
     glScaled(1, 1, 0.8)
     glRotated(wheelAngle, 0, 0, 1)
-    gluCylinder(wheel, 1, 1, 1, 10, 5) # Wheel
+    gluCylinder(tube, 1, 1, 1, 10, 5) # Wheel
     glPopMatrix()
 
     # Drawing Car Wheel (Front Left)
@@ -213,7 +237,7 @@ def draw():
     glTranslated(carPosition + 1, 0, -5.8)
     glScaled(1, 1, 0.8)
     glRotated(wheelAngle, 0, 0, 1)
-    gluCylinder(wheel, 1, 1, 1, 10, 5) # Wheel
+    gluCylinder(tube, 1, 1, 1, 10, 5) # Wheel
     glPopMatrix()
 
     # Drawing Car Wheel (Back Right)
@@ -221,7 +245,7 @@ def draw():
     glTranslated(carPosition + -7, 0, 2)
     glScaled(1, 1, 0.8)
     glRotated(wheelAngle, 0, 0, 1)
-    gluCylinder(wheel, 1, 1, 1, 10, 5) # Wheel
+    gluCylinder(tube, 1, 1, 1, 10, 5) # Wheel
     glPopMatrix()
 
     # Drawing Car Wheel (Back Left)
@@ -229,7 +253,7 @@ def draw():
     glTranslated(carPosition + -7, 0, -5.8)
     glScaled(1, 1, 0.8)
     glRotated(wheelAngle, 0, 0, 1)
-    gluCylinder(wheel, 1, 1, 1, 10, 5) # Wheel
+    gluCylinder(tube, 1, 1, 1, 10, 5) # Wheel
     glPopMatrix()
 
 
