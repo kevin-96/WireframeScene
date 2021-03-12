@@ -197,7 +197,7 @@ def draw():
     glTranslated(carPosition + -8.65, 0.05, -1.4)
     glScaled(1, 0.3, 0.5)
     glRotated(-90, 0, 1, 0) # Rotate exhaust pipe to face in x-axis
-    gluCylinder(tube, 2, 2, 3, 50, 1) # Headlight
+    gluCylinder(tube, 2, 2, 3, 50, 1) # Long exhaust pipe
     glPopMatrix()
 
     # Drawing Car Headlights (Front Left)
