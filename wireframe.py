@@ -71,7 +71,7 @@ def init():
     global cone, tube, block
     cone = gluNewQuadric() # Cone shape
     gluQuadricDrawStyle(cone, GLU_LINE)
-    tube = gluNewQuadric() # Car wheel shape, exhaust pipe, headlights
+    tube = gluNewQuadric() # Car wheel shape, exhaust, headlights, taillights
     gluQuadricDrawStyle(tube, GLU_LINE)
     block = gluNewQuadric() # Car body shape
     gluQuadricDrawStyle(block, GLU_LINE)
@@ -113,7 +113,7 @@ def timer(alarm):
 
 # Advance the scene one frame
 # This method is responsible for the car's animation:
-#   Car movement going forward and backward)
+#   Car movement going forward and backward
 #   Wheel rotation going CW and CCW
 def advance():
     global carPosition, carDx, carDxMin, carDxMax, wheelAngle, wheelAngleD
@@ -172,7 +172,7 @@ def drawScene():
     glColor3f(0, 0, 0) # Controls wireframe color. (1,1,1) = WHITE. (0,0,0) = BLACK
     draw()
 
-# Draw the entire scene: 2 Cones & 1 Car (Body + Wheels)
+# Draw the entire scene: 2 Cones & 1 Car
 def draw():
     glPushMatrix()
     # Drawing Cones
@@ -192,34 +192,48 @@ def draw():
     gluCylinder(block, 2, 2, 7, 4, 1) # Body (Bottom)
     glPopMatrix()
 
-    # Drawing Car MEGA Exhaust Pipe (Back Center)
+    # Drawing Car Taillights (Left)
     glPushMatrix()
-    glTranslated(carPosition + -8.65, 0.05, -1.4)
+    glTranslated(carPosition + -8.8, 0, -3.7)
+    glScaled(0.2, 0.6, 1.7)
+    glutWireCube(1) # Taillight (Rectangular)
+    glPopMatrix()
+
+    # Drawing Car Taillights (Right)
+    glPushMatrix()
+    glTranslated(carPosition + -8.8, 0, 0.8)
+    glScaled(0.2, 0.6, 1.7)
+    glutWireCube(1) # Taillight (Rectangular)
+    glPopMatrix()
+
+    # Drawing Car MEGA Exhaust (Car Rear Center)
+    glPushMatrix()
+    glTranslated(carPosition + -8.65, 0.05, -1.45)
     glScaled(1, 0.3, 0.5)
     glRotated(-90, 0, 1, 0) # Rotate exhaust pipe to face in x-axis
     gluCylinder(tube, 2, 2, 3, 50, 1) # Long exhaust pipe
     glPopMatrix()
 
-    # Drawing Car Headlights (Front Left)
+    # Drawing Car Headlights (Left)
     glPushMatrix()
     glTranslated(carPosition + 2.9, 0.05, -3.5)
     glScaled(0.15, 0.3, 0.3) # Making the headlight flatter and smaller
     glRotated(-90, 0, 1, 0) # Rotate headlight so it faces in the x-axis
-    gluCylinder(tube, 2, 2, 1, 50, 1) # Headlight
+    gluCylinder(tube, 2, 2, 1, 50, 1) # Headlight (Circular)
     glPopMatrix()
 
-    # Drawing Car Headlights (Front Right)
+    # Drawing Car Headlights (Right)
     glPushMatrix()
     glTranslated(carPosition + 2.9, 0.05, 0.5)
     glScaled(0.15, 0.3, 0.3) # Making the headlight flatter and smaller
     glRotated(-90, 0, 1, 0) # Rotate headlight so it faces in the x-axis
-    gluCylinder(tube, 2, 2, 1, 50, 1) # Headlight
+    gluCylinder(tube, 2, 2, 1, 50, 1) # Headlight (Circular)
     glPopMatrix()
 
     # Drawing Car Body (Top)
     glPushMatrix()
-    glTranslated(carPosition + 0, 1.45, -5)
-    glScaled(0.8, 0.5, 1)
+    glTranslated(carPosition + -0.8, 1.45, -5)
+    glScaled(1.0, 0.5, 1)
     glRotated(-45, 0, 0, 1) # Drawing body parallel to x-axis
     gluCylinder(block, 2, 2, 7, 4, 1) # Body (Top)
     glPopMatrix()
@@ -258,12 +272,10 @@ def draw():
 
 
 #===============================
-# SHAPE NOTES:
-#
+# NOTES:
 #   gluCylinder(quadric, base r, top r, height (along z), slices (around), stacks (towards height))
 #
 #   Cone: Slices = 10, Stacks = 11
-#   Block:
 #   Wheels: Slices = 10 , Stacks = 5
 #===============================
 
